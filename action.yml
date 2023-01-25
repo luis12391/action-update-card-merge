@@ -1,4 +1,5 @@
 name: 'Update card in click up'
+description: 'With this action you will be able to update your cards in the click up after when a merges is closed in github'
 author: 'luis12391'
 inputs:
   comments:
