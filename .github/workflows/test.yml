@@ -12,3 +12,4 @@ jobs:
       uses: ./ # Uses an action in the root directory
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        comments: "Preuab"
