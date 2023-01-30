@@ -15,8 +15,5 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-RUN npm run build
-COPY package*.json ./
-
 EXPOSE 8080
-CMD [ "node", "dist/index.js" ]
+CMD [ "node", "index.js" ]
