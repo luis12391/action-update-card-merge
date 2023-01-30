@@ -1,6 +1,6 @@
 name: Discord message
 on:
-  issue_comment: # github.event_name == issue_comment
+  create: # github.event_name == issue_comment
         
 jobs:
   report:
