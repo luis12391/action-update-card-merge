@@ -1,10 +1,10 @@
 name: 'Update card in click up'
-description: 'With this action you will be able to update your cards in the click up after when a merges is closed in github'
+description: 'With this action after every merge is closed in github you will be able to update your cards in the click up'
 author: 'luis12391'
 inputs:
   comments:
-    required: false
-    default: "Without commmnets"
+    required: true
+    default: "N/A"
 runs:
   using: 'docker'
   image: 'Dockerfile'
