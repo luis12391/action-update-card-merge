@@ -2,7 +2,7 @@ const core = require("@actions/core");
 const axios = require("axios");
 
 //Required parameters
-const github_api = core.getInput("github_api");
+const clickup_api_url = core.getInput("clickup_api_url");
 const clickup_token = core.getInput("clickup_token");
 const gonni_team_id = core.getInput("team_id");
 const space_name = core.getInput("space_name");
@@ -25,26 +25,26 @@ const headers = {
 };
 
 const getSpaceByTeamIdAndSpaceName = async (itemId, spaceName) => {
-  const get_spaces_url = `${github_api}team/${itemId}/space`;
+  const get_spaces_url = `${clickup_api_url}team/${itemId}/space`;
   const spaces = await axios.get(get_spaces_url, headers);
   return spaces.data.spaces.find((item) => item.name == spaceName);
 };
 
 const getFolderlessListsBySpaceId = async (spaceId) => {
-  const get_folderless_lists_url = `${github_api}space/${spaceId}/list`;
+  const get_folderless_lists_url = `${clickup_api_url}space/${spaceId}/list`;
   const lists = await axios.get(get_folderless_lists_url, headers);
   return lists.data.lists;
 };
 
 const getTasksByListId = async (listId) => {
-  const get_tasks_url = `${github_api}list/${listId}/task`;
+  const get_tasks_url = `${clickup_api_url}list/${listId}/task`;
   const task = await axios.get(get_tasks_url, headers);
   return task.data?.tasks;
 };
 
 const updateTaskByIds = async (tasks, newStatus, parentId) => {
   tasks.forEach(async (task) => {
-    const put_tasks_url = `${github_api}task/${task.id}`;
+    const put_tasks_url = `${clickup_api_url}task/${task.id}`;
     task.status = newStatus;
     task.parent = parentId;
     const result = await axios.put(put_tasks_url, task, headers);
@@ -52,7 +52,7 @@ const updateTaskByIds = async (tasks, newStatus, parentId) => {
 };
 
 const createNewTaskByListId = async (taskIds, listId) => {
-  const new_task_url = `${github_api}list/${listId}/task`;
+  const new_task_url = `${clickup_api_url}list/${listId}/task`;
   const newTask = {
     name: "Release Task from node (Es una prueba, tengo que borrarlo) - responsable Luis",
     description: `These tasks will be implemented in this release: ${taskIds.toString()}`,
