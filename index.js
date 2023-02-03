@@ -3,18 +3,18 @@ const axios = require("axios");
 
 //Required parameters
 const github_api = core.getInput("github_api");
-const clickup_token = core.getInput("github_clickup_token");
-const gonni_team_id = core.getInput("github_team_id");
-const space_name = core.getInput("github_space_name");
+const clickup_token = core.getInput("clickup_token");
+const gonni_team_id = core.getInput("team_id");
+const space_name = core.getInput("space_name");
 const task_ids_to_move = ["SM-92", "SM-91"];
-const newStatus = core.getInput("github_new_status");;
-const fromListName = core.getInput("github_from_list_name");;
-const toListName = core.getInput("github_to_list_name");
+const newStatus = core.getInput("new_status");;
+const fromListName = core.getInput("from_list_name");;
+const toListName = core.getInput("to_list_name");
 
 //Optional parameters
-let spaceId = core.getInput("github_space_id");
-let fromListId = core.getInput("github_from_list_id");
-let toListId = core.getInput("github_from_to_id");
+let spaceId = core.getInput("space_id");
+let fromListId = core.getInput("from_list_id");
+let toListId = core.getInput("to_list_id");
 
 const headers = {
   headers: {
