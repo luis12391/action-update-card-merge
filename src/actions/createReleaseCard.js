@@ -109,7 +109,7 @@ const moveTaskByIdsToNewStatus = async (newStatus, team_id, space_name) => {
   console.log("Creating new main card");
   const mainTask = await createNewTaskByListId(toListId);
 
-  console.log("associating card with main card: " , taskIdsToMove.toString(), " with id: ", mainTask.id );
+  console.log("Associating cards " , taskIdsToMove.toString(), " with main card: ", mainTask.id );
   await updateTaskByIds(tasksToMove, newStatus, mainTask.id);
 };
 
