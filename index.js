@@ -7,9 +7,11 @@ const clickup_token = core.getInput("clickup_token");
 const gonni_team_id = core.getInput("team_id");
 const space_name = core.getInput("space_name");
 const task_ids_to_move = ["SM-92", "SM-91"];
-const newStatus = core.getInput("new_status");;
+const newStatus = core.getInput("new_status");
 const fromListName = core.getInput("from_list_name");;
 const toListName = core.getInput("to_list_name");
+const pr_body = core.getInput("pr_body");
+const pr_title = core.getInput("pr_title");
 
 //Optional parameters
 let spaceId = core.getInput("space_id");
@@ -54,8 +56,8 @@ const updateTaskByIds = async (tasks, newStatus, parentId) => {
 const createNewTaskByListId = async (taskIds, listId) => {
   const new_task_url = `${clickup_api_url}list/${listId}/task`;
   const newTask = {
-    name: "Release Task from node (Es una prueba, tengo que borrarlo) - responsable Luis",
-    description: `These tasks will be implemented in this release: ${taskIds.toString()}`,
+    name: `Release Task from node (Es una prueba, tengo que borrarlo) - responsable Luis ${pr_title}`,
+    description: `These tasks will be implemented in this release: ${taskIds.toString()} ${pr_body}`,
     tags: ["feature"],
     status: "backlog",
   };

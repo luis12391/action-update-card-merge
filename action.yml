@@ -22,7 +22,10 @@ inputs:
     required: false
   to_list_id:
     required: false
-  comments:
+  pr_body:
+    required: true
+    default: "N/A"
+  pr_title:
     required: true
     default: "N/A"
 runs:
