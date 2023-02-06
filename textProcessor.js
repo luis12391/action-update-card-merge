@@ -7,10 +7,11 @@ const getIdsFromDescription = (text, shortName) => {
     for (let i = 1; i < splitText.length; i++) {
       const splitLinea = splitText[i].split(".");
       if (splitLinea.length > 0) {
-        ids.push(`${shortName}-splitLinea[0]`);
+        ids.push(`${shortName}-${splitLinea[0]}`);
       }
     }
   }
+
   return ids.sort();
 };
 
