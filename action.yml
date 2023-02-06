@@ -2,20 +2,22 @@ name: 'Update card in click up'
 description: 'With this action after every merge is closed in github you will be able to update your cards in the click up'
 author: 'luis12391'
 inputs:
+  action_type:
+    required: true
   clickup_api_url:
-    required: true
+    required: false
   clickup_token:
-    required: true
+    required: false
   team_id:
-    required: true
+    required: false
   space_name:
-    required: true
+    required: false
   new_status:
-    required: true
+    required: false
   from_list_name:
-    required: true
+    required: false
   to_list_name:
-    required: true
+    required: false
   from_list_id:
     required: false
   space_id:
@@ -23,13 +25,13 @@ inputs:
   to_list_id:
     required: false
   pr_body:
-    required: true
+    required: false
     default: "N/A"
   pr_title:
-    required: true
+    required: false
     default: "N/A"
   short_project_name:
-    requiered : true
+    requiered : false
 runs:
   using: 'docker'
   image: 'Dockerfile'

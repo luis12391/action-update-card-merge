@@ -1,6 +1,6 @@
 const core = require("@actions/core");
 const axios = require("axios");
-const textProccessor = require("./textProcessor");
+const textProccessor = require("../utils/textProcessor");
 
 //Required parameters
 const clickup_api_url = core.getInput("clickup_api_url");
@@ -18,6 +18,14 @@ const shortProjectName = core.getInput("short_project_name");
 let spaceId = core.getInput("space_id");
 let fromListId = core.getInput("from_list_id");
 let toListId = core.getInput("to_list_id");
+
+const createReleaseCardOnClickup = async () => {
+  if (checkRequiredParameters()) {
+    await moveTaskByIdsToNewStatus(newStatus, gonni_team_id, space_name);
+  }else{
+    new Error(`Tthere are required parameters for this action that have not been set correctly`);
+  }
+};
 
 const headers = {
   headers: {
@@ -67,15 +75,14 @@ const createNewTaskByListId = async (listId) => {
 };
 
 const getTaskIdsFormDescriptionPr = (description, shortProjectName) => {
-  const taskIds = textProccessor.getIdsFromDescription(description, shortProjectName);
+  const taskIds = textProccessor.getIdsFromDescription(
+    description,
+    shortProjectName
+  );
   return taskIds;
 };
 
-const moveTaskByIdsToNewStatus = async (
-  newStatus,
-  team_id,
-  space_name
-) => {
+const moveTaskByIdsToNewStatus = async (newStatus, team_id, space_name) => {
   if (!fromListId || !toListId) {
     if (!spaceId) {
       const space = await getSpaceByTeamIdAndSpaceName(team_id, space_name);
@@ -95,29 +102,23 @@ const moveTaskByIdsToNewStatus = async (
   }
 
   const tasks = await getTasksByListId(fromListId);
-  const taskIdsToMove = getTaskIdsFormDescriptionPr(pr_body,shortProjectName); 
+  const taskIdsToMove = getTaskIdsFormDescriptionPr(pr_body, shortProjectName);
 
-  const tasksToMove = tasks.filter((t) =>
-    taskIdsToMove.includes(t.custom_id)
-  );
+  const tasksToMove = tasks.filter((t) => taskIdsToMove.includes(t.custom_id));
+
+  console.log("Creating new main card");
   const mainTask = await createNewTaskByListId(toListId);
 
+  console.log("associating card with main card: " , taskIdsToMove.toString(), " with id: ", mainTask.id );
   await updateTaskByIds(tasksToMove, newStatus, mainTask.id);
 };
 
-async function start() {
-  try {
-    await moveTaskByIdsToNewStatus(
-      newStatus,
-      gonni_team_id,
-      space_name
-    );
-  } catch (error) {
-    console.log(error);
+const checkRequiredParameters = () => {
+  if (clickup_api_url && clickup_token && gonni_team_id && space_name &&
+    newStatus && fromListName && toListName && pr_body && pr_title && shortProjectName) {
+      return false;
   }
+  return true;
 }
-start();
-console.log(process.env.GITHUB_EVENT_NAME);
-console.log(process.env.GITHUB_REF_NAME);
 
-console.log("Commnets: ", core.getInput("comments"));
+module.exports = { createReleaseCardOnClickup };
