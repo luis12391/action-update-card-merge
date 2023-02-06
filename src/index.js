@@ -1,3 +1,4 @@
+const core = require("@actions/core");
 const action = require("./actionFactory");
 
 //Required parameters
