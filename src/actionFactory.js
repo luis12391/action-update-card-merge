@@ -1,24 +1,27 @@
 const createClickUpReleaseCard = require("./actions/createReleaseCard");
 const actionTypes = require("./consts/actionTypes");
 
-const actionFactory = () => {
-  createAction = (type) => {
+function actionFactory() {
+  this.createAction = function (type) {
     switch (type) {
       case actionTypes.CREATE_CLICKUP_RELEASE_CARD:
-        return new createReleaseCardOnClickup();
+        return createReleaseCardOnClickup();
       default:
-        new Error(`The action type is wrong: ${type}`);
-        break;
+        throw `The action type is wrong: ${type}`;
     }
   };
 
-  githubAction = (taskToExec) => {
-    exec = async () => await taskToExec();
-  };
+  function githubAction(taskToExec) {
+    this.exec = async () => await taskToExec();
+  }
 
-  createReleaseCardOnClickup = async () => {
-    return new githubAction(await createClickUpReleaseCard());
-  };
+  function createReleaseCardOnClickup() {
+    return new githubAction(() => createClickUpReleaseCard());
+  }
+}
+
+const build = () => {
+  return new actionFactory();
 };
 
-module.exports = { actionFactory };
+module.exports = { build };

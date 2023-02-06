@@ -23,7 +23,7 @@ const createReleaseCardOnClickup = async () => {
   if (checkRequiredParameters()) {
     await moveTaskByIdsToNewStatus(newStatus, gonni_team_id, space_name);
   }else{
-    new Error(`Tthere are required parameters for this action that have not been set correctly`);
+    throw `There are required parameters for this action that have not been set correctly`;
   }
 };
 
@@ -121,4 +121,4 @@ const checkRequiredParameters = () => {
   return true;
 }
 
-module.exports = { createReleaseCardOnClickup };
+module.exports = createReleaseCardOnClickup ;
