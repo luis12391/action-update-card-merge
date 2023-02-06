@@ -116,9 +116,9 @@ const moveTaskByIdsToNewStatus = async (newStatus, team_id, space_name) => {
 const checkRequiredParameters = () => {
   if (clickup_api_url && clickup_token && gonni_team_id && space_name &&
     newStatus && fromListName && toListName && pr_body && pr_title && shortProjectName) {
-      return false;
+      return true;
   }
-  return true;
+  return false;
 }
 
 module.exports = createReleaseCardOnClickup ;
