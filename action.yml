@@ -28,6 +28,8 @@ inputs:
   pr_title:
     required: true
     default: "N/A"
+  short_project_name:
+    requiered : true
 runs:
   using: 'docker'
   image: 'Dockerfile'
