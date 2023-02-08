@@ -18,10 +18,11 @@ const newTag = _core.getInput("new_tag");
 
 const crateClickupReleaseCard = async () => {
   if (checkRequiredParameters()) {
-    const cardTitle = `[${projectType}] ${branch_name}`;
+    const cardTitle = `[${projectType}] Release`;
     const cardDescription = ``;
     const { custom_id } = await createReleaseCard(cardTitle, cardDescription);
     _core.exportVariable('card_custom_id', custom_id);
+    console.log("Custom card id: ", custom_id);
   } else {
     throw `There are required parameters for this action that have not been set correctly`;
   }
