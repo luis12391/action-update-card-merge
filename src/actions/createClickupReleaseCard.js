@@ -9,6 +9,7 @@ const branch_name = _core.getInput("branch_name");
 const space_name = _core.getInput("space_name");
 const shortProjectName = _core.getInput("short_project_name");
 const projectType = _core.getInput("project_type");
+const toListName = _core.getInput("to_list_name");
 
 //Optional parameters
 let spaceId = _core.getInput("space_id");
@@ -36,7 +37,8 @@ const checkRequiredParameters = () => {
     space_name &&
     branch_name &&
     shortProjectName &&
-    projectType
+    projectType &&
+    toListName
   ) {
     return true;
   }
