@@ -23,7 +23,11 @@ const crateClickupReleaseCard = async () => {
     const cardDescription = ``;
     const { custom_id } = await createReleaseCard(cardTitle, cardDescription);
     _core.exportVariable("card_custom_id", custom_id);
+    const restOfbranchName = branch_name.split("/")[1];
+    _core.exportVariable("version_name", restOfbranchName);
     console.log("Custom card id: ", custom_id);
+    console.log("Version Name: ", restOfbranchName);
+
   } else {
     throw `There are required parameters for this action that have not been set correctly`;
   }
