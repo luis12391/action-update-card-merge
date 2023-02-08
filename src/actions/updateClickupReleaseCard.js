@@ -19,7 +19,7 @@ let spaceId = core.getInput("space_id");
 let fromListId = core.getInput("from_list_id");
 let toListId = core.getInput("to_list_id");
 
-const createReleaseCardOnClickup = async () => {
+const updateClickupReleaseCard = async () => {
   if (checkRequiredParameters()) {
     await moveTaskByIdsToNewStatus(newStatus, gonni_team_id, space_name);
   }else{
@@ -121,4 +121,4 @@ const checkRequiredParameters = () => {
   return false;
 }
 
-module.exports = createReleaseCardOnClickup ;
+module.exports = updateClickupReleaseCard ;

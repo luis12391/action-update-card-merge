@@ -32,6 +32,12 @@ inputs:
     default: "N/A"
   short_project_name:
     requiered : false
+  branch_name: 
+    requiered: false
+  project_type:
+    requiered: false
+outputs:
+  github_custom_id
 runs:
   using: 'docker'
   image: 'Dockerfile'
