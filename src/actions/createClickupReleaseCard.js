@@ -71,7 +71,7 @@ const createReleaseCard = async (title, description) => {
     [newTag] || ["feature"]
   );
 
-  await sleep(1000);
+  await sleep(2500);
 
   const task = await _service.getTasksById(newTask.id);
 
