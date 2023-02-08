@@ -39,6 +39,8 @@ inputs:
 outputs:
   card_custom_id:
     description: 'A clickup custom card id'
+  version_name:
+    description: 'Version of the release'
 runs:
   using: 'docker'
   image: 'Dockerfile'
