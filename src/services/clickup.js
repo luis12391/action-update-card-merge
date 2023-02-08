@@ -31,6 +31,12 @@ const getTasksByListId = async (listId) => {
   return task.data?.tasks;
 };
 
+const getTasksById = async (id) => {
+  const get_task_url = `${clickup_api_url}task/${id}`;
+  const task = await _axios.get(get_task_url, headers);
+  return task.data;
+};
+
 const updateTaskByIds = async (tasks, newStatus, parentId) => {
   tasks.forEach(async (task) => {
     const put_tasks_url = `${clickup_api_url}task/${task.id}`;
@@ -65,4 +71,5 @@ module.exports = {
   getTasksByListId,
   updateTaskByIds,
   createNewTaskByListId,
+  getTasksById
 };
