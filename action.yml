@@ -37,7 +37,8 @@ inputs:
   project_type:
     requiered: false
 outputs:
-  card_custom_id
+  card_custom_id:
+    description: 'A clickup custom card id'
 runs:
   using: 'docker'
   image: 'Dockerfile'
