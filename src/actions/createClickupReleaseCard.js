@@ -46,7 +46,7 @@ const createReleaseCard = async (title, description) => {
   if (!toListId) {
     if (!spaceId) {
       const space = await _service.getSpaceByTeamIdAndSpaceName(
-        team_id,
+        gonni_team_id,
         space_name
       );
       spaceId = space.id;
