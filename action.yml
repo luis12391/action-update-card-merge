@@ -37,7 +37,7 @@ inputs:
   project_type:
     requiered: false
 outputs:
-  github_custom_id
+  card_custom_id
 runs:
   using: 'docker'
   image: 'Dockerfile'
