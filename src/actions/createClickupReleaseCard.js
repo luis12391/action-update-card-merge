@@ -74,7 +74,7 @@ const createReleaseCard = async (title, description) => {
   await sleep(2500);
 
   const task = await _service.getTasksById(newTask.id);
-
+  console.log(task);
   return task;
 };
 
