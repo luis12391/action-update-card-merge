@@ -36,6 +36,8 @@ inputs:
     requiered: false
   project_type:
     requiered: false
+  new_tag:
+    requiered: false
 outputs:
   card_custom_id:
     description: 'A clickup custom card id'
