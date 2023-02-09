@@ -19,15 +19,15 @@ const newTag = _core.getInput("new_tag");
 
 const crateClickupReleaseCard = async () => {
   if (checkRequiredParameters()) {
-    const cardTitle = `[${projectType}] Release`;
     const cardDescription = ``;
+    const restOfbranchName = branch_name.split("/")[1];
+    const cardTitle = `[${projectType}] Release ${restOfbranchName}`;
     const { custom_id } = await createReleaseCard(cardTitle, cardDescription);
     _core.exportVariable("card_custom_id", custom_id);
-    const restOfbranchName = branch_name.split("/")[1];
+
     _core.exportVariable("version_name", restOfbranchName);
     console.log("Custom card id: ", custom_id);
     console.log("Version Name: ", restOfbranchName);
-
   } else {
     throw `There are required parameters for this action that have not been set correctly`;
   }
@@ -71,16 +71,38 @@ const createReleaseCard = async (title, description) => {
     [newTag] || ["feature"]
   );
 
-  await sleep(2500);
+  const msTowait = 2500;
+  const amountRetries = 10;
 
-  const task = await _service.getTasksById(newTask.id);
-  console.log(task);
-  return task;
+  const newReleaseTask = await retry(
+    msTowait,
+    amountRetries,
+    newTask.id,
+    async (id) => await isThereCustomId(id)
+  );
+
+  return newReleaseTask;
 };
 
-const sleep = (ms) => {
+const isThereCustomId = async (id) => {
+  const task = await _service.getTasksById(id);
+  console.log(task);
+  if (task.custom_id) {
+    return { isDataFound: true, data: { ...task } };
+  }
+  return { isDataFound: false };
+};
+
+const retry = (ms, amount, parameter, callback) => {
   return new Promise((resolve) => {
-    setTimeout(resolve, ms);
+    let count = 0;
+    let idInterval = setInterval(async () => {
+      const result = await callback(parameter);
+      if (count > amount || result.isDataFound) {
+        clearInterval(idInterval);
+        resolve(result.data);
+      }
+    }, ms);
   });
 };
 
