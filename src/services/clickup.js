@@ -2,8 +2,8 @@ const _core = require("@actions/core");
 const _axios = require("axios");
 
 //Required parameters
-const clickup_api_url = _core.getInput("clickup_api_url") || "https://api.clickup.com/api/v2/";;
-const clickup_token = _core.getInput("clickup_token") || "pk_3249083_P96J2L5DX9HSIPRKRZFVWJPHMCFBSZ5O";
+const clickup_api_url = _core.getInput("clickup_api_url");
+const clickup_token = _core.getInput("clickup_token");
 
 const headers = {
   headers: {
