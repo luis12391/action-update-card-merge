@@ -13,7 +13,6 @@ const toListName = _core.getInput("to_list_name") || "05 - A TESTEAR";
 const pr_body = _core.getInput("pr_body");
 const pr_title = _core.getInput("pr_title");
 const shortProjectName = _core.getInput("short_project_name");
-const releaseCardId = _core.getInput("release_card_id");
 const branch_name = _core.getInput("branch_name");
 
 //Optional parameters
@@ -74,7 +73,6 @@ const checkRequiredParameters = () => {
     pr_body &&
     pr_title &&
     shortProjectName &&
-    releaseCardId &&
     branch_name
   ) {
     return true;
