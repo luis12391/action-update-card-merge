@@ -1,4 +1,4 @@
-const updateClickupReleaseCard = require("./actions/updateClickupReleaseCard");
+const addClickupReleaseCard = require("./actions/addClickupReleaseCard");
 const crateClickupReleaseCard = require("./actions/createClickupReleaseCard");
 
 const actionTypes = require("./consts/actionTypes");
@@ -6,8 +6,8 @@ const actionTypes = require("./consts/actionTypes");
 function actionFactory() {
   this.createAction = function (type) {
     switch (type) {
-      case actionTypes.CREATE_SUBTASKS_IN_RELEASE_CARD:
-        return updateReleaseCard();
+      case actionTypes.ADD_SUBTASKS_TO_RELEASE_CARD:
+        return addReleaseCard();
       case actionTypes.CREATE_CLICKUP_RELEASE_CARD:
         return crateReleaseCard();
       default:
@@ -19,8 +19,8 @@ function actionFactory() {
     this.exec = async () => await taskToExec();
   }
 
-  function updateReleaseCard() {
-    return new githubAction(() => updateClickupReleaseCard());
+  function addReleaseCard() {
+    return new githubAction(() => addClickupReleaseCard());
   }
 
   function crateReleaseCard() {

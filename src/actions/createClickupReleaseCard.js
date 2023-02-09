@@ -24,10 +24,9 @@ const crateClickupReleaseCard = async () => {
     const cardTitle = `[${projectType}] Release ${restOfbranchName}`;
     const { custom_id } = await createReleaseCard(cardTitle, cardDescription);
     _core.exportVariable("card_custom_id", custom_id);
-
     _core.exportVariable("version_name", restOfbranchName);
     console.log("Custom card id: ", custom_id);
-    console.log("Version Name: ", restOfbranchName);
+    console.log("Version name: ", restOfbranchName);
   } else {
     throw `There are required parameters for this action that have not been set correctly`;
   }
@@ -86,7 +85,6 @@ const createReleaseCard = async (title, description) => {
 
 const isThereCustomId = async (id) => {
   const task = await _service.getTasksById(id);
-  console.log(task);
   if (task.custom_id) {
     return { isDataFound: true, data: { ...task } };
   }
